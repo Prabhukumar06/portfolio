@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+y    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prabhu - Full Stack Developer</title>
+    <link rel="icon" type="image/x-icon" href="./images/ico/profile.ico">
+    <link rel="icon" type="image/png" href="./images/profile.png">
+    <link rel="apple-touch-icon" href="./images/profile.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0A192F; /* Dark Navy Blue */
+            color: #E6F1FF; /* Light Blueish White */
+        }
+        .accent-yellow {
+            color: #FFD700; /* Gold/Yellow Accent */
+        }
+        .bg-accent-yellow {
+
+            background-color: #FFD700;
+        }
+        .border-accent-yellow {
+            border-color: #FFD700;
+        }
+        .card-bg {
+            background-color: #112240; /* Slightly Lighter Navy for cards */
+        }
+        .section-title {
+            font-size: 2.5rem; /* 40px */
+            font-weight: 700;
+            margin-bottom: 2rem; /* 32px */
+            text-align: center;
+        }
+        .skill-icon {
+            width: 64px; /* 4rem */
+            height: 64px; /* 4rem */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.5rem; /* 8px */
+            margin-bottom: 0.5rem; /* 8px */
+        }
+        .additional-skill-icon {
+            width: 48px; /* 3rem */
+            height: 48px; /* 3rem */
+        }
+        .btn {
+            padding: 0.75rem 1.5rem; /* 12px 24px */
+            border-radius: 0.375rem; /* 6px */
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary {
+            background-color: #FFD700;
+            color: #0A192F;
+        }
+        .btn-primary:hover {
+            background-color: #e6c300;
+        }
+        .btn-secondary {
+            border: 2px solid #FFD700;
+            color: #FFD700;
+        }
+        .btn-secondary:hover {
+            background-color: #FFD700;
+            color: #0A192F;
+        }
+        .form-input {
+            background-color: #112240;
+            border: 1px solid #243A5E; /* Darker border for inputs */
+            color: #E6F1FF;
+            padding: 0.75rem 1rem; /* 12px 16px */
+            border-radius: 0.375rem; /* 6px */
+            width: 100%;
+        }
+        .form-input::placeholder {
+            color: #8892B0; /* Lighter Navy for placeholder */
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #FFD700;
+            box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.5);
+        }
+        /* Custom scrollbar for a more integrated look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0A192F;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #112240;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #243A5E;
+        }
+
+        /* Keyframes for skill card animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .skill-card-animation {
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header/Nav Placeholder -->
+    <header class="py-6 px-4 sm:px-6 lg:px-8 fixed top-0 left-0 right-0 z-50 bg-opacity-90 backdrop-blur-md" style="background-color: rgba(10, 25, 47, 0.8);">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold accent-yellow">P.</h1>
+            <nav class="hidden md:flex space-x-6">
+                <a href="#who" class="hover:accent-yellow transition-colors">About</a>
+                <a href="#skills" class="hover:accent-yellow transition-colors">Skills</a>
+                <a href="#works" class="hover:accent-yellow transition-colors">Works</a>
+                <a href="#contact" class="hover:accent-yellow transition-colors">Contact</a>
+            </nav>
+            <button id="mobileMenuButton" class="md:hidden focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden mt-4 space-y-2 px-4">
+            <a href="#who" class="block py-2 hover:accent-yellow transition-colors">About</a>
+            <a href="#skills" class="block py-2 hover:accent-yellow transition-colors">Skills</a>
+            <a href="#works" class="block py-2 hover:accent-yellow transition-colors">Works</a>
+            <a href="#contact" class="block py-2 hover:accent-yellow transition-colors">Contact</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex items-center justify-center pt-20 pb-10 px-4 sm:px-6 lg:px-8" style="background: linear-gradient(135deg, #0A192F 0%, #112240 100%);">
+        <div class="container mx-auto text-center">
+            <div class="relative inline-block mb-8">
+                <img src="./images/profile.png" alt="Ferdous Ahmed" class="rounded-full w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 mx-auto border-4 border-accent-yellow shadow-xl object-cover" onerror="this.onerror=null;this.src='https://placehold.co/200x200/112240/FFD700?text=Profile+Pic';">
+                <!-- Floating text elements - positioning might need adjustment based on actual image -->
+                <div class="absolute top-0 -left-10 sm:-left-20 transform -translate-y-1/2 card-bg p-3 rounded-lg shadow-lg animate-float hidden md:block">
+                    <p class="text-sm">Innovative Solutions</p>
+                </div>
+                 <div class="absolute bottom-0 -right-10 sm:-right-20 transform translate-y-1/2 card-bg p-3 rounded-lg shadow-lg animate-float-delay hidden md:block">
+                    <p class="text-sm">User-Centric Design</p>
+                </div>
+            </div>
+            <h2 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-3">
+                I'm <span class="accent-yellow">Prabhu</span>
+            </h2>
+            <h3 class="text-2xl sm:text-3xl font-semibold text-gray-300 mb-8">
+                Full Stack Developer
+            </h3>
+            <div class="flex justify-center space-x-4">
+                <a href="#contact" class="btn btn-primary">Hire Me</a>
+                <a href="#works" class="btn btn-secondary">View My Work</a>
+            </div>
+        </div>
+    </section>
+    <style>
+        @keyframes float {
+            0% { transform: translateY(0px)  translateX(-20px); }
+            50% { transform: translateY(-10px) translateX(-20px); }
+            100% { transform: translateY(0px) translateX(-20px); }
+        }
+        @keyframes float-delay {
+            0% { transform: translateY(0px) translateX(20px); }
+            50% { transform: translateY(10px) translateX(20px); }
+            100% { transform: translateY(0px) translateX(20px); }
+        }
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        .animate-float-delay { animation: float-delay 3s ease-in-out infinite 0.5s; }
+    </style>
+
+    <!-- Who Am I Section -->
+    <section id="who" class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
+        <div class="container mx-auto">
+            <h2 class="section-title">WHO AM I ?</h2>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="relative">
+                    <img src="./images/codingstp/codingsetup.jpg" alt="Ferdous Ahmed working" class="rounded-lg shadow-xl w-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/112240/E6F1FF?text=My+Workspace';">
+                     <!-- Floating card for "WHO AM I?" text -->
+                    <div class="absolute -bottom-5 -right-5 card-bg p-4 rounded-lg shadow-lg max-w-xs hidden sm:block">
+                        <p class="text-sm text-gray-300">Passionate about crafting elegant and efficient digital experiences.</p>
+                    </div>
+                </div>
+                <div class="text-lg text-gray-300 space-y-4">
+                    <p>Hello! I'm Prabhu, a dedicated Full Stack Developer with a passion for creating intuitive, dynamic, and responsive web applications. I thrive on turning complex problems into elegant solutions.</p>
+                    <p>My journey in web development started with a fascination for how websites work, and it has grown into a full-fledged career where I continuously learn and adapt to new technologies. I believe in writing clean, maintainable code and collaborating effectively with teams to achieve outstanding results.</p>
+                    <p>When I'm not coding, I enjoy exploring new tech trends, contributing to open-source projects</p>
+                    <a href="./resume/K.-PRABHU.pdf" download class="inline-block mt-6 btn btn-primary">Download Resume</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- My Skills Section -->
+    <section id="skills" class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-opacity-50" style="background-color: #112240;">
+        <div class="container mx-auto">
+            <h2 class="section-title">MY SKILLS</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
+                <!-- Skills Grid -->
+                <div class="col-span-1 lg:col-span-2 grid grid-cols-2 sm:grid-cols-3 gap-6">
+                    <!-- Skill 1: HTML -->
+                    <div class="card-bg p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition-shadow duration-300 skill-card-animation" style="animation-delay: 0.1s;">
+                        <div class="skill-icon  mx-auto">
+                            <img src="./images/skills/html.png" alt="">
+                        </div>
+                        <h3 class="font-semibold text-xl mb-1">HTML5</h3>
+                        <p class="text-sm text-gray-400">Semantic & Accessible</p>
+                    </div>
+                    <!-- Skill 2: CSS -->
+                    <div class="card-bg p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition-shadow duration-300 skill-card-animation" style="animation-delay: 0.2s;">
+                        <div class="skill-icon  mx-auto">
+                            <img src="./images/skills/css.png" alt="">
+                        </div>
+                        <h3 class="font-semibold text-xl mb-1">CSS3</h3>
+                        <p class="text-sm text-gray-400">Responsive Design</p>
+                    </div>
+                    <!-- Skill 3: JavaScript -->
+                    <div class="card-bg p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition-shadow duration-300 skill-card-animation" style="animation-delay: 0.3s;">
+                        <div class="skill-icon  mx-auto">
+                            <img src="./images/skills/springBoot.png" alt="">
+                        </div>
+                        <h3 class="font-semibold text-xl mb-1">Spring Boot</h3>
+                        <p class="text-sm text-gray-400">Backend Framework</p>
+                    </div>
+                    <!-- Skill 4: React -->
+                    <div class="card-bg p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition-shadow duration-300 skill-card-animation" style="animation-delay: 0.4s;">
+                        <div class="skill-icon bg-blue-400 mx-auto">
+                            <img src="./images/skills/js.png" alt="">
+                        </div>
+                        <h3 class="font-semibold text-xl mb-1">JavaScript</h3>
+                        <p class="text-sm text-gray-400">Dynamic Web</p>
+                    </div>
+                     <!-- Skill 5: Node.js -->
+                    <div class="card-bg p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition-shadow duration-300 skill-card-animation" style="animation-delay: 0.5s;">
+                        <div class="skill-icon bg-green-500 mx-auto">
+                            <img src="./images/skills/c.png" alt="">
+                        </div>
+                        <h3 class="font-semibold text-xl mb-1">C</h3>
+                        <p class="text-sm text-gray-400">System Programming</p>
+                    </div>
+                    <!-- Skill 6: Database -->
+                    <div class="card-bg p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition-shadow duration-300 skill-card-animation" style="animation-delay: 0.6s;">
+                        <div class="skill-icon bg-purple-500 mx-auto">
+                            <img src="./images/skills/c++.png" alt="">
+                        </div>
+                        <h3 class="font-semibold text-xl mb-1">C++</h3>
+                        <p class="text-sm text-gray-400">High Performance</p>
+                    </div>
+                    <div class="card-bg p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition-shadow duration-300 skill-card-animation" style="animation-delay: 0.7s;">
+                        <div class="skill-icon mx-auto">
+                            <img src="./images/skills/mysql.png" alt="">
+                        </div>
+                        <h3 class="font-semibold text-xl mb-1">MySQL</h3>
+                        <p class="text-sm text-gray-400">Relational Database</p>
+                    </div>
+                    <div class="card-bg p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition-shadow duration-300 skill-card-animation" style="animation-delay: 0.8s;">
+                        <div class="skill-icon  mx-auto">
+                            <img src="./images/skills/java.png" alt="">
+                        </div>
+                        <h3 class="font-semibold text-xl mb-1">Java</h3>
+                        <p class="text-sm text-gray-400">Enterprise Applications</p>
+                    </div>
+                </div>
+                <!-- Experience Block -->
+                <div class="card-bg p-8 rounded-lg shadow-lg flex flex-col items-center justify-center text-center">
+                    <div class="text-6xl font-bold accent-yellow mb-2">1</div>
+                    <div class="text-2xl font-semibold mb-1">Years</div>
+                    <div class="text-lg text-gray-300">Experience Working</div>
+                    <p class="text-sm text-gray-400 mt-4">Delivering high-quality projects and collaborating with dynamic teams.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional Skills Section -->
+    <section id="additional-skills" class="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
+        <div class="container mx-auto">
+            <h3 class="text-2xl font-semibold text-center mb-8">ADDITIONAL SKILLS</h3>
+            <div class="flex flex-wrap justify-center items-center gap-6 sm:gap-8">
+                <!-- Placeholder icons for additional skills. Replace with actual SVGs or images. -->
+                <div class="additional-skill-icon skill-icon bg-gray-700 p-2" title="Git">
+                    <img src="./images/additionalSkill/git.png" alt="Git" class="w-full h-full object-contain" onerror="this.onerror=null;this.src='https://placehold.co/48x48/FFFFFF/0A192F?text=G';">
+                </div>
+                <div class="additional-skill-icon skill-icon bg-gray-700 p-2" title="GitHub">
+                    <img src="./images/additionalSkill/github.png" alt="Docker" class="w-full h-full object-contain" onerror="this.onerror=null;this.src='https://placehold.co/48x48/FFFFFF/0A192F?text=D';">
+                </div>
+                <div class="additional-skill-icon skill-icon bg-gray-700 p-2" title="Firebase">
+                     <img src="./images/additionalSkill/firebase.png" alt="AWS" class="w-full h-full object-contain" onerror="this.onerror=null;this.src='https://placehold.co/48x48/FFFFFF/0A192F?text=A';">
+                </div>
+                <div class="additional-skill-icon skill-icon bg-gray-700 p-2" title="Supabase">
+                     <img src="./images/additionalSkill/supabase.png" alt="Figma" class="w-full h-full object-contain" onerror="this.onerror=null;this.src='https://placehold.co/48x48/FFFFFF/0A192F?text=F';">
+                </div>
+        
+            </div>
+        </div>
+    </section>
+
+    <!-- The Works Section -->
+    <section id="works" class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8" style="background-color: #0A192F;">
+        <div class="container mx-auto">
+            <h2 class="section-title">THE WORKS<br class="sm:hidden"><span class="accent-yellow"> CLOSEST TO MY HEART</span></h2>
+            <div class="flex justify-center">
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+                <!-- Project Card 1 -->
+                <div class="card-bg rounded-lg shadow-lg overflow-hidden group">
+                    <img src="./images/project/vlsi.jpg" alt="Project 1" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null;this.src='https://placehold.co/600x400/112240/FFD700?text=P1';">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 accent-yellow">A Wireless Sensor Network (WSN) consists of spatially distributed sensors</h3>
+                        <p class="text-sm text-gray-400 mb-4">A full-featured online store with payment integration and admin panel.</p>
+                        <!-- <a href="#" class="text-sm btn btn-secondary">View Project</a> -->
+                    </div>
+                </div>
+                <!-- Project Card 2 -->
+                <div class="card-bg rounded-lg shadow-lg overflow-hidden group">
+                    <img src="./images/project/tabacademy.jpg" alt="Project 2" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null;this.src='https://placehold.co/600x400/243A5E/FFD700?text=P2';">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 accent-yellow">Tap Academy Website – Responsive Layout using HTML</h3>
+                        <p class="text-sm text-gray-400 mb-4">Designed the full layout of Tap Academy’s website using semantic HTML for better accessibility and SEO.</p>
+                        <!-- <a href="#" class="text-sm btn btn-secondary">View Project</a> -->
+                    </div>
+                </div>
+    
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="#" class="btn btn-primary">Show My Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Let's Have a Chat Section -->
+    <section id="contact" class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-white text-gray-800">
+        <div class="container mx-auto max-w-3xl">
+            <h2 class="section-title text-gray-800">LET'S HAVE A CHAT</h2>
+            <form id="contactForm" class="space-y-6">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
+                    <input type="text" name="name" id="name" required class="form-input border-gray-300 focus:border-yellow-500 focus:ring-yellow-500" placeholder="John Doe">
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Your Email</label>
+                    <input type="email" name="email" id="email" required class="form-input border-gray-300 focus:border-yellow-500 focus:ring-yellow-500" placeholder="you@example.com">
+                </div>
+                <div>
+                    <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+                    <input type="text" name="subject" id="subject" required class="form-input border-gray-300 focus:border-yellow-500 focus:ring-yellow-500" placeholder="Regarding a project">
+                </div>
+                <div>
+                    <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Your Message</label>
+                    <textarea name="message" id="message" rows="4" required class="form-input border-gray-300 focus:border-yellow-500 focus:ring-yellow-500" placeholder="Hi Ferdous, I'd like to discuss..."></textarea>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary text-gray-900 bg-accent-yellow hover:bg-yellow-400 w-full sm:w-auto">Submit Now</button>
+                </div>
+            </form>
+            <div id="formMessage" class="mt-6 text-center"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center text-gray-400 border-t border-gray-700">
+        <div class="container mx-auto">
+            <p>&copy; <span id="currentYear"></span> Prabhu. All rights reserved.</p>
+            <p class="text-sm">Designed with <span class="accent-yellow">&hearts;</span> and coded with passion.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    // Close mobile menu if open after click
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+
+        // Set current year in footer
+        const currentYearElement = document.getElementById('currentYear');
+        if (currentYearElement) {
+            currentYearElement.textContent = new Date().getFullYear();
+        }
+
+        // Contact Form Submission
+        const contactForm = document.getElementById('contactForm');
+        const formMessage = document.getElementById('formMessage');
+
+        if(contactForm) {
+            contactForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                // Basic form validation feedback (actual submission logic would go here)
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value;
+
+                if (name && email && subject && message) {
+                    formMessage.textContent = 'Thank you for your message! I will get back to you soon.';
+                    formMessage.className = 'mt-6 text-center text-green-600';
+                    contactForm.reset();
+                } else {
+                    formMessage.textContent = 'Please fill out all fields.';
+                    formMessage.className = 'mt-6 text-center text-red-600';
+                }
+
+                // Hide message after a few seconds
+                setTimeout(() => {
+                    formMessage.textContent = '';
+                }, 5000);
+            });
+        }
+    </script>
+
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const skillCards = document.querySelectorAll('.skill-card-animation');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            skillCards.forEach(card => {
+                card.style.opacity = '0'; // Ensure they are hidden initially
+                card.style.transform = 'translateY(20px)'; // Initial position for slide-up
+                card.style.animationPlayState = 'paused'; // Pause animation until in view
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
+
